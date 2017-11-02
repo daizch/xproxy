@@ -1,0 +1,23 @@
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+prompt = no
+
+[ req_distinguished_name ]
+countryName              = CN
+stateOrProvinceName      = GuangDong
+localityName             = ShenZhen
+# organizationName         = xproxy
+organizationalUnitName   = Inc
+commonName               = xproxy
+
+[ v3_req ]
+# Extensions to add to a certificate request
+basicConstraints = CA:false
+# keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = *
+
+
