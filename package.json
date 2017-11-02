@@ -11,5 +11,8 @@
     "server"
   ],
   "author": "zechengdai",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "koa-static": "^2.0.0"
+  }
 }
