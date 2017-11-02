@@ -92,11 +92,11 @@ process.on('uncaughtException', function (err) {
 });
 
 function checkLatestVersion() {
-    var child = shelljs.exec('tnpm view @tencent/xproxy version', {silent: true, async: true});
+    var child = shelljs.exec('npm view xproxy version', {silent: true, async: true});
     child.stdout.on('data', function (result) {
         var latestVersion = semver.clean(result);
         if (latestVersion && semver.lt(pkg.version, latestVersion)) {
-            console.log(chalk.green(`xproxy最新版本是${latestVersion}，请尽快升级 $ tnpm i -g @tencent/xproxy`));
+            console.log(chalk.green(`xproxy最新版本是${latestVersion}，请尽快升级 $ npm i -g xproxy`));
         }
     });
 
