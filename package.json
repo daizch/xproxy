@@ -1,6 +1,6 @@
 {
   "name": "xproxy",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "http/https proxy server",
   "main": "index.js",
   "scripts": {
