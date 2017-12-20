@@ -1,5 +1,8 @@
 # xproxy
 
+[![NPM version](https://img.shields.io/npm/v/xproxy.svg?style=flat)](https://www.npmjs.com/package/xproxy)
+[![Build Status](https://secure.travis-ci.org/daizch/xproxy.svg?branch=master)](http://travis-ci.org/daizch/xproxy)
+
 前端代理服务器
 
 ## 功能
