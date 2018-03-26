@@ -18,7 +18,7 @@ basicConstraints = CA:false
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = *.freelog.com
-DNS.2 = *.testfreelog.com
+DNS.1 = *.testxxx.com
+DNS.2 = *.xxx.com
 
 

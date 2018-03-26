@@ -16,13 +16,13 @@
 `局部安装`:
 
 ```sh
-npm install xproxy 
+$ npm install xproxy 
 ```
 
 `全局安装`:
 
 ```sh
-npm install xproxy -g
+$ npm install xproxy -g
 ```
 
 ### 添加映射规则
@@ -30,7 +30,7 @@ npm install xproxy -g
 `创建proxy.conf.js`:
 
 ```sh
-xproxy init
+$ xproxy init
 ```
 
 在需要映射的目录下添加xproxy.conf.js,可执行上方的命令生成默认的xproxy.conf.js范例
@@ -53,34 +53,41 @@ xproxy init
 
 
 ```sh
-xproxy server
+$ xproxy server
 ```
 
 
 ## 本地调试命令
 ```sh
-npm start
+$ npm start
 ```
 
 另外一种启动方式,出错自动重启
 
 ```sh
-npm i pm2 -g
-npm run server
+$ npm i pm2 -g
+$ npm run server
 ```
 
 停止自动重启
 
 ```sh
-npm run kill
+$ npm run kill
 ```
 
 ## https
 
+### 生成自定义的https配置模板
+根据自身需要修改生成的openssl.cnf配置
+
+```sh
+$ xproxy cert init
+```
+
 ### 生成证书
 
 ```shell
-xproxy cert
+$ xproxy cert
 ```
 
 cd ~/.xproxy/cert
