@@ -90,7 +90,13 @@ $ xproxy cert init
 $ xproxy cert
 ```
 
-cd ~/.xproxy/cert
+
+### 获取ca文件
+
+```sh
+$ xproxy cert ca
+```
+
 
 ### 安装
 

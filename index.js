@@ -55,8 +55,10 @@ program.command('cert [cmd]')
   .action(function (cmd, opts) {
     if (!cmd) {
       certUtil.generateCert(opts);
-    } else if (cmd == 'init') {
+    } else if (cmd === 'init') {
       certUtil.initOpenSSLConfig()
+    } else if (cmd === 'ca') {
+      certUtil.copyCAFiles()
     }
   });
 
@@ -93,6 +95,7 @@ program.command('init')
 
 process.on('uncaughtException', function (err) {
   console.log(err);
+  checkLatestVersion();
 });
 
 function checkLatestVersion() {
@@ -114,6 +117,6 @@ program
   .action(function (env) {
     console.error('命令有误,请检查');
     program.outputHelp();
+    checkLatestVersion();
   });
-checkLatestVersion();
 program.parse(process.argv);
