@@ -7,11 +7,13 @@ const pkg = require('./package.json');
 const proxyConfig = require('./default.xproxy.conf');
 const _ = require('lodash');
 const debug = require('debug');
+const updateNotifier = require('update-notifier');
 const certUtil = require('./lib/cert/');
 var chalk = require('chalk');
 var semver = require('semver');
-
 const CWD = process.cwd();
+
+
 program
   .version(pkg.version, '-v, --version');
 
@@ -99,17 +101,10 @@ process.on('uncaughtException', function (err) {
 });
 
 function checkLatestVersion() {
-  var child = shelljs.exec('npm view xproxy version', {silent: true, async: true});
-  child.stdout.on('data', function (result) {
-    var latestVersion = semver.clean(result);
-    if (latestVersion && semver.lt(pkg.version, latestVersion)) {
-      console.log(chalk.green(`xproxy最新版本是${latestVersion}，请尽快升级 $ npm i -g xproxy`));
-    }
-  });
-
-  setTimeout(function () {
-    child.kill();
-  }, 3e3);
+  var notifier = updateNotifier({pkg});
+  if (notifier.update) {
+    console.log(`Update available: ${notifier.update.latest}`);
+  }
 }
 
 program
@@ -119,4 +114,6 @@ program
     program.outputHelp();
     checkLatestVersion();
   });
+
+checkLatestVersion();
 program.parse(process.argv);
