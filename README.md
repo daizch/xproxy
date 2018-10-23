@@ -131,13 +131,14 @@ $ xproxy cert ca
 * xproxy.conf.js里的urls进行设置，按序匹配，一旦匹配就返回。匹配不到或者本地找不到文件则请求线上。
 * rule: 正则
 * target：function or string
+* headers: function or object, 设置response的响应头
 * 如果匹配不到或者本地无该文件,可通过返回noop或者qs中含noop的即可不走线上请求。
 
 ```javascript
 module.exports = {
     urls: [
             {
-                rule: /^/xxx/demo.js$/,   
+                rule: /^\/xxx\/demo.js$/,   
                 target: 'noop' //不走线上,直接404返回
             },
             {
