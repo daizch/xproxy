@@ -23,7 +23,6 @@ program.command('server')
   .option('-p, --port [value]', 'the port for http server to listen')
   .option('-s, --ssl-port [value]', 'the port for https server to listen')
   .option('-S, --silent', 'disable output debug logs')
-  .option('-d, --debug', 'set weinre debug mode')
   .action(function (args) {
     var opts = {};
     var cmds = [];
@@ -38,7 +37,7 @@ program.command('server')
     if (args.silent) {
       debug.disable('*');
     } else {
-      debug.enable('*,-koa-send,-co-urllib,-readall');
+      debug.enable('*,-koa-send,-readall');
     }
 
     _.extend(opts, proxyConfig);

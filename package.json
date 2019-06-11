@@ -34,9 +34,7 @@
   "dependencies": {
     "bytes": "^2.4.0",
     "chalk": "^1.1.3",
-    "cheerio": "^0.20.0",
-    "co": "^4.6.0",
-    "co-urllib": "^0.2.3",
+    "cheerio": "^0.22.0",
     "commander": "^2.9.0",
     "debug": "^2.2.0",
     "expand-home-dir": "0.0.3",
@@ -46,25 +44,23 @@
     "ip": "^1.1.3",
     "koa": "^2.5.2",
     "koa-static": "^5.0.0",
-    "lodash": "^4.13.1",
+    "lodash": "^4.17.11",
     "mime": "^1.3.4",
     "node-dev": "^3.1.1",
     "node-fetch": "^1.5.3",
     "passthrough-counter": "^1.0.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.7",
-    "update-notifier": "^2.4.0",
-    "weinre": "^2.0.0-pre-I0Z7U9OV"
+    "update-notifier": "^2.4.0"
   },
   "devDependencies": {
-    "autod": "^3.0.0",
-    "co-request": "^1.0.0",
+    "autod": "^3.1.0",
     "iconv-lite": "^0.4.15",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.5.3",
-    "pm2": "^1.1.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.1.4",
+    "pm2": "^3.5.1",
     "should": "^9.0.0",
-    "supertest": "^1.2.0"
+    "supertest": "^4.0.2"
   },
   "directories": {
     "test": "test"

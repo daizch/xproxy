@@ -1,5 +1,5 @@
 var request = require('supertest');
-var assets = require('../lib/assets');
+var assets = require('../lib/server/assets');
 var path = require('path');
 var koa = require('koa');
 var assert = require('assert');
@@ -7,6 +7,7 @@ var assert = require('assert');
 describe('assets(opt)', function () {
     describe('with opt', function () {
         var proxyCfg = {
+            root: path.resolve('.'),
             urls: [
                 {
                     rule: /(.*)/,
@@ -16,7 +17,7 @@ describe('assets(opt)', function () {
         };
 
         it('should 200', function (done) {
-            var app = koa();
+            var app = new koa();
 
             app.use(assets(proxyCfg));
 
@@ -26,7 +27,7 @@ describe('assets(opt)', function () {
         });
 
         it('should 404', function (done) {
-            var app = koa();
+            var app = new koa();
 
             app.use(assets(proxyCfg));
 
@@ -39,7 +40,7 @@ describe('assets(opt)', function () {
 
     describe('proxy config', function () {
         it('should 200', function (done) {
-            var app = koa();
+            var app = new koa();
             var proxyCfg = {
                 urls: [
                     {
@@ -56,7 +57,7 @@ describe('assets(opt)', function () {
         });
 
         it('should 404', function (done) {
-            var app = koa();
+            var app = new koa();
             var proxyCfg = {
                 urls: [
                     {
@@ -73,7 +74,7 @@ describe('assets(opt)', function () {
         });
 
         it('should 200 for target function', function (done) {
-            var app = koa();
+            var app = new koa();
             var proxyCfg = {
                 urls: [
                     {
