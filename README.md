@@ -3,143 +3,122 @@
 [![NPM version](https://img.shields.io/npm/v/xproxy.svg?style=flat)](https://www.npmjs.com/package/xproxy)
 [![Build Status](https://secure.travis-ci.org/daizch/xproxy.svg?branch=master)](http://travis-ci.org/daizch/xproxy)
 
-前端代理服务器
+Proxy server implemented by Node.js
 
-## 功能
-1. http&https静态资源代理服务器,通过配置文件xproxy.conf.js可设置转发
-1. 支持weinre调试
+## Features
+1. http&https server for serving static assets, could forward your request via `xproxy.conf.js` configuration file.
+2. support `weinre` to debug mobile device
 
-## 用法
+## Usage
 
 ### install
 
-`局部安装`:
+`install for project`:
 
 ```sh
 $ npm install xproxy 
 ```
 
-`全局安装`:
+`global install`:
 
 ```sh
 $ npm install xproxy -g
 ```
 
-### 添加映射规则
+### proxy mapping rule
 
-`创建proxy.conf.js`:
+You could add or modify the mapping rule for proxy requests. 
+To quickly create `xproxy.conf.js` boilerplate
 
 ```sh
 $ xproxy init
 ```
 
-在需要映射的目录下添加xproxy.conf.js,可执行上方的命令生成默认的xproxy.conf.js范例
-
-在xproxy.conf.js里添加或修改映射的路径规则,可参考下文的映射规则用法
-
-### 配置host
-`host绑定`,将需要代理的域名映射到本机
+### host binding
+`host binding` means to bind the specific domain name to your localhost
 
 //host
 127.0.0.1 xx.demo.com
 
-`hosts管理工具推荐`
+`recommendation of host binding tool`
 
 - windows: [Hosts File Editor](https://hostsfileeditor.codeplex.com/)
 - Mac: [gasmask](https://github.com/2ndalpha/gasmask)
 
-### 启动
-设置xproxy.conf.js里的root为自己的代码根目录,mac需要sudo执行
+### How to launch
 
-
-```sh
-$ xproxy server
-```
-
-
-## 本地调试命令
-```sh
-$ npm start
-```
-
-另外一种启动方式,出错自动重启
+Must run the cli below with the place where `xproxy.config.js` it is located
 
 ```sh
-$ npm i pm2 -g
-$ npm run server
-```
-
-停止自动重启
-
-```sh
-$ npm run kill
+$ sudo xproxy server
 ```
 
 ## https
 
-### 生成自定义的https配置模板
-根据自身需要修改生成的openssl.cnf配置
+### prerequisite
+
+- to generate customized certificate template for https
+Must adjust the generated openssl.cnf according to your domain name
 
 ```sh
 $ xproxy cert init
 ```
 
-### 生成证书
+- to generate certificate after modifying openssl.cnf
 
 ```shell
 $ xproxy cert
 ```
 
-
-### 获取ca文件
+- to generate CA certificate
 
 ```sh
 $ xproxy cert ca
 ```
 
 
-### 安装
+#### installation
 
-#### 移动端iOS
-将xproxy_ca.crt在Safari中打开,进入安装,按手机提示进行操作。
+##### iOS
+using safari to open `xproxy_ca.crt` in your phone. Then install it following the instructions.
 
-可启动server后(npm start),在手机端访问`本机ip地址+/xproxy_ca.crt`,或者访问`绑定的域名+/xproxy_ca.crt`
+You could access `${localIP}/xproxy_ca.crt` in your phone after you launch xproxy. Or you could use `${boundDomaiName}/xproxy_ca.crt` after you bind the domain name to your localhost in your host confi.
 
-#### Mac
-- Mac上直接双击xproxy_ca.crt安装
-- 进入到keychain后,右击证书,点击显示简介
-- 展开`信任`列表,将`使用此证书时`选项设置为`始终相信`
+##### Mac
+- double-click xproxy_ca.crt to trigger installation
+- open `keychain Access` application after you finish installation. Find the certificate, right-click on the certificate and choose `Get Info`
+- open `Trust` and change the config of `while using this certificate` into `always trust`
 
 
-### 默认设置
-* http server默认监听80
-* https server默认监听443
-* server默认serv的根目录为当前启动目录。
+### default configuration
+* the default port for http server is 80
+* the default port for http server is 443
+* by default, serve the current working directory
 
-可在xproxy.conf.js里进行修改以上默认值。
+You could modify the default configuration at `xproxy.conf.js`
 
-### 支持参数
+### parameter
 | parameter | description |
 | --- | --- |
-| -r, --root | 设置root目录
-| -p, --port | 设置http server监听端口
-| -s, --ssl-port | 设置https server监听端口
-| -S, --silent | 静默模式
-| -d, --debug | 启动weinre调试模式
+| -r, --root | config root directory
+| -p, --port | port for http server to listen
+| -s, --ssl-port | port for https server to listen
+| -S, --silent | silent mode
+| -d, --debug | enable weinre mode
 
-### 映射规则
-* xproxy.conf.js里的urls进行设置，按序匹配，一旦匹配就返回。匹配不到或者本地找不到文件则请求线上。
-* rule: 正则
+### mapping rule
+* config urls in `xproxy.conf.js`, xproxy will return the match result once it match the rule. xproxy will manage to request production if no urls matched or no files found in local directory.
+* rule: regex expression
 * target：function or string
-* headers: function or object, 设置response的响应头
-* 如果匹配不到或者本地无该文件,可通过返回noop或者qs中含noop的即可不走线上请求。
+* headers: function or object, to support config headers of response
+* you could set a unknow target if you want to forward the traffic to production server.
 
 ```javascript
 module.exports = {
     urls: [
             {
                 rule: /^\/xxx\/demo.js$/,   
-                target: 'noop' //不走线上,直接404返回
+                target: 'noop' 
             },
             {
                 rule: /(\/dir.*)$/,
@@ -161,7 +140,3 @@ module.exports = {
         ]
 }
 ```
-
-
-## last
-有任何问题或者需求或建议,欢迎给我提~
