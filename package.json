@@ -50,7 +50,7 @@
     "node-fetch": "^1.7.3",
     "passthrough-counter": "^1.0.0",
     "semver": "^5.7.1",
-    "shelljs": "^0.7.7",
+    "shelljs": "^0.8.5",
     "update-notifier": "^2.5.0"
   },
   "devDependencies": {
